@@ -97,7 +97,7 @@ h2 span
 .improvement-lines-grid
 	{
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(320px, 1fr));
 		gap: 30px;
 		margin-top: 50px;
 		margin-left: 0;
@@ -106,18 +106,11 @@ h2 span
 		grid-auto-flow: row;
 	}
 
-.improvement-lines-grid > [class*="col-"]
+.improvement-lines-grid > .improvement-item
 	{
-		float: none;
-		width: auto;
+		width: 100%;
 		max-width: none;
-		padding-left: 0;
-		padding-right: 0;
-	}
-
-.improvement-lines-grid > :first-child
-	{
-		grid-column: 1 / -1;
+		padding: 0;
 	}
 
 .improvement-card
@@ -166,7 +159,7 @@ h2 span
 		line-height: 1.65;
 	}
 
-@media only screen and (max-width: 900px)
+@media only screen and (max-width: 640px)
 	{
 		.improvement-lines-grid
 			{
@@ -263,10 +256,41 @@ h2 span
 header
 	{
 		min-height: 20px;
-		padding-top: 18px;
-		padding-bottom: 10px;
+		padding-top: 16px;
+		padding-bottom: 14px;
 		background: var(--color-principal-profundo);
 		color: var(--color-claro);
+	}
+header .row
+	{
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: space-between;
+		column-gap: 18px;
+		row-gap: 10px;
+	}
+header .row > div
+	{
+		padding-left: 0;
+		padding-right: 0;
+		float: none;
+		width: auto;
+	}
+header .row > div:first-child
+	{
+		flex: 0 0 auto;
+	}
+header .row > div:nth-child(2)
+	{
+		flex: 0 0 auto;
+	}
+header .row > div:last-child
+	{
+		flex: 0 0 auto;
+		margin-left: auto;
+		display: flex;
+		justify-content: flex-end;
 	}
 header .fa
 	{
@@ -276,12 +300,16 @@ header span
 	{
 		color: var(--color-claro);
 		font-weight: bold;
-		padding-right: 10px;
-		padding-left: 4px;
+		padding-right: 0;
+		padding-left: 0;
 	}
 header p
 	{
-		margin: 0 0 8px 0;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		line-height: 1.45;
 	}
 header .row > div:first-child
 	{
@@ -307,15 +335,25 @@ header .header-email a
 	}
 header .social-icon
 	{
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 12px;
+		flex-wrap: nowrap;
+		width: auto;
 		text-align: right;
+	}
+header .social-icon li
+	{
+		margin: 0;
 	}
 header .social-icon li a
 	{
 		border: none;
 		color: #d9e3f3;
-		width: 20px;
-		height: 20px;
-		line-height: 20px;
+		width: 24px;
+		height: 24px;
+		line-height: 24px;
 		text-align: center;
 	}
 /* end header */
@@ -574,7 +612,7 @@ header .social-icon li a
 	}
 #team .team-wrapper .team-photo-gonzalo
 	{
-		object-position: center 20%;
+		object-position: center 50%;
 	}
 #team .team-wrapper:hover
 	{
@@ -591,6 +629,31 @@ header .social-icon li a
 		font-size: 34px;
 		line-height: 1.2;
 		margin-bottom: 18px;
+	}
+#team .team-wrapper .team-des .team-name-row
+	{
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 18px;
+	}
+#team .team-wrapper .team-des .team-name-row h4
+	{
+		margin-bottom: 0;
+	}
+#team .team-wrapper .team-des .team-linkedin
+	{
+		color: inherit;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 26px;
+		line-height: 1;
+		text-decoration: none;
+	}
+#team .team-wrapper .team-des .team-linkedin:hover
+	{
+		color: var(--color-acento);
 	}
 #team .team-wrapper .team-des span
 	{
@@ -642,8 +705,8 @@ header .social-icon li a
 	}
 #team .team-wrapper .team-des .team-university-logos .university-logo--udec
 	{
-		max-height: 72px;
-		max-width: 220px;
+		max-height: 64px;
+		max-width: 190px;
 	}
 #team .team-wrapper .team-des .team-university-logos .university-logo:hover
 	{
@@ -931,8 +994,25 @@ header .social-icon li a
 	header {
 		margin-top: 70px;
 	}
+	header .row {
+		display: flex;
+		flex-direction: column;
+		row-gap: 8px;
+	}
+	header .row > div {
+		padding-left: 0;
+		padding-right: 0;
+		width: 100%;
+	}
+	header .row > div:last-child {
+		margin-left: 0;
+		display: block;
+	}
 	header .social-icon {
 		text-align: left;
+		justify-content: flex-start;
+		width: auto;
+		flex-wrap: nowrap;
 	}
 	.navbar-toggle {
 		margin-top: 15px;
