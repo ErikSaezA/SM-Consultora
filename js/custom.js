@@ -44,12 +44,14 @@ $(function(){
     });
     /* end navigation top js */
 
-    /* start contact form mailto */
+    /* start contact form async submit */
     $('#contact-form').on('submit', function(event){
         event.preventDefault();
 
+        var $form = $('#contact-form');
         var $submit = $('#contact-form input[type="submit"]');
         var $status = $('#form-status');
+        var $success = $('#form-success-message');
 
         var nombre = $('#fullname').val().trim() || 'Sin nombre';
         var correo = $('#email').val().trim() || 'Sin correo';
@@ -85,8 +87,12 @@ $(function(){
             return response.json();
         })
         .then(function() {
-            $status.text('Consulta enviada correctamente. Te responderemos pronto.');
-            $('#contact-form')[0].reset();
+            $status.text('');
+            $form.fadeOut(260, function() {
+                $success
+                    .html('Gracias por tu consulta.<br>Te contactaremos a la brevedad.')
+                    .fadeIn(420);
+            });
         })
         .catch(function() {
             $status.text('No fue posible enviar la consulta. Intenta nuevamente en unos minutos.');
