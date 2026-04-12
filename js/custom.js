@@ -40,6 +40,22 @@ $(function(){
     });
     /* end navigation top js */
 
+    /* start contact form mailto */
+    $('#contact-form').on('submit', function(event){
+        event.preventDefault();
+
+        var nombre = $('#fullname').val() || 'Sin nombre';
+        var correo = $('#email').val() || 'Sin correo';
+        var mensaje = $('#message').val() || 'Sin mensaje';
+
+        var asunto = '[ASUNTO] ' + nombre;
+        var cuerpo = '[' + correo + '] ' + mensaje;
+        var mailtoUrl = 'mailto:contacto@sm-consultora.com?subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(cuerpo);
+
+        window.location.href = mailtoUrl;
+    });
+    /* end contact form mailto */
+
     $('body').bind('touchstart', function() {});
 
     /* wow

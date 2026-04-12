@@ -3,21 +3,33 @@ Awesome Template
 http://www.templatemo.com/preview/templatemo_450_awesome
 */
 
+:root
+	{
+		--color-principal: #f5f6f7;
+		--color-claro: #ffffff;
+		--color-acento: #6b7280;
+		--color-principal-suave: #e5e7eb;
+		--color-principal-profundo: #2f343a;
+		--color-texto: #1f2328;
+		--color-texto-secundario: #4b5563;
+		--color-borde: #c8cdd3;
+	}
+
 body
 	{
- 		background: #303030;
- 		color: #ffffff;
+	 	background: var(--color-principal);
+	 	color: var(--color-texto);
 		font-family: 'Open Sans', sans-serif;
 		font-weight: 300;
 		overflow-x: hidden; /* prevent horizontal scrollbar from appearing */
 	}
 	
 a {
-	color: #47C6F8;
+	color: var(--color-acento);
 }
 	
 a:hover {
-	color: #0FF;
+	color: var(--color-texto);
 }
 
 /* start h2 */
@@ -29,7 +41,7 @@ h2
 	}	
 h2 span
 	{
-		color: #28a7e9;
+		color: var(--color-acento);
 		font-weight: bold;
 	}
 /* end h2 */
@@ -67,7 +79,7 @@ h2 span
   		-webkit-align-items: center;
   		    -ms-flex-align: center;
   		        align-items: center;
-  		background: none repeat scroll 0 0 #ffffff;
+		background: none repeat scroll 0 0 var(--color-claro);
 	}
 .sk-spinner-wave.sk-spinner 
 	{
@@ -78,7 +90,7 @@ h2 span
   	}
 .sk-spinner-wave div 
 	{
-  		background-color: #333;
+		background-color: var(--color-texto);
   		height: 100%;
   		width: 6px;
   		display: inline-block;
@@ -135,7 +147,7 @@ header
 	}
 header .fa
 	{
-		color: #28a7e9;
+		color: var(--color-acento);
 	}
 header span
 	{
@@ -145,7 +157,7 @@ header span
 	}
 header a
 	{
-		color: #999;
+		color: var(--color-texto-secundario);
 		font-weight: 600;
 	}
 header .social-icon
@@ -165,21 +177,39 @@ header .social-icon li a
 /* start nagivation */
 .navbar-default
 	{
-		background: #fff;
+		background: var(--color-claro);
 		border: none;
 		box-shadow: none;
 		margin: 0 !important;
 	}
 .navbar-default .navbar-brand
 	{
+		color: var(--color-texto);
+		display: flex;
+		align-items: center;
+		gap: 10px;
 		font-weight: 500;
-		font-size: 30px;
+		font-size: 22px;
 		height: 70px;
-		line-height: 40px;
+		line-height: 1;
 		padding: 12px 0px 0px 12px;
+	}
+.navbar-default .navbar-brand .brand-logo
+	{
+		height: 44px;
+		width: auto;
+		max-width: 120px;
+	}
+.navbar-default .navbar-brand .brand-text
+	{
+		font-size: 18px;
+		font-weight: 700;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
 	}
 .navbar-default .navbar-nav li a
 	{
+		color: var(--color-texto) !important;
 		font-weight: bold;
 		font-size: 13px;
 		height: 70px;
@@ -187,7 +217,7 @@ header .social-icon li a
 	}
 
 .navbar-default .navbar-nav > li > a.current { 
-	color: #28A7E9; 
+	color: var(--color-acento) !important; 
 }
 .templatemo-nav {
 	border-radius: 0;	
@@ -209,6 +239,7 @@ header .social-icon li a
 		padding-top: 160px;
 		padding-bottom: 100px;
 		min-height: 650px;
+		color: var(--color-claro);
 	}
 #home h1
 	{
@@ -218,14 +249,14 @@ header .social-icon li a
 	}
 #home h1 span
 	{
-		color: #28a7e9;
+		color: var(--color-acento);
 		font-weight: bold;
 	}
 #home .btn
 	{
 		background: transparent;
 		border-radius: 2px;
-		color: #fff;
+		color: var(--color-claro);
 		font-size: 16px;
 		font-weight: bold;
 		margin-top: 20px;
@@ -237,7 +268,7 @@ header .social-icon li a
 	}
 #home .btn:hover
 	{
-		background: #28a7e9;
+		background: var(--color-acento);
 		border-color: transparent;
 	}
 .element {
@@ -247,15 +278,53 @@ header .social-icon li a
 /* end home */
 
 /* start about */
+#about .quienes-somos-row
+	{
+		margin-bottom: 40px;
+		display: flex;
+		align-items: stretch;
+	}
+#about .quienes-somos-texto-col,
+#about .quienes-somos-logo-col
+	{
+		display: flex;
+	}
+#about .quienes-somos-texto
+	{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+#about .quienes-somos-texto p
+	{
+		font-size: 16px;
+		line-height: 1.8;
+		color: var(--color-texto-secundario);
+		margin-bottom: 14px;
+	}
+#about .quienes-somos-logo-wrap
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+	}
+#about .quienes-somos-logo
+	{
+		display: inline-block;
+		max-width: 280px;
+		width: 100%;
+		height: auto;
+	}
 #about .media-heading-wrapper
 	{
 		padding-bottom: 32px;
 	}
 #about .media-heading-wrapper .fa
 	{
-		border: 1px solid #fff;
+		border: 1px solid var(--color-acento);
 		border-radius: 2px;
-		color: #fff;
+		color: var(--color-acento);
 		font-size: 24px;
 		width: 60px;
 		height: 60px;
@@ -276,11 +345,29 @@ header .social-icon li a
 /* start team */
 #team .team-wrapper
 	{
-		background: #404040;
+		background: var(--color-principal-profundo);
 		padding-bottom: 10px;
+		color: var(--color-claro);
+		min-height: 0;
 		-webkit-transition: all 0.4s ease-in-out;
 		        transition: all 0.4s ease-in-out;
 		position: relative;
+	}
+#team .team-wrapper .team-photo
+	{
+		width: 100%;
+		height: 360px;
+		display: block;
+		object-fit: cover;
+		filter: grayscale(100%);
+	}
+#team .team-wrapper .team-photo-erik
+	{
+		object-position: center 18%;
+	}
+#team .team-wrapper .team-photo-gonzalo
+	{
+		object-position: center 12%;
 	}
 #team .team-wrapper:hover
 	{
@@ -290,14 +377,37 @@ header .social-icon li a
 	}
 #team .team-wrapper .team-des
 	{
-		padding: 20px;
+		padding: 28px;
+	}
+#team .team-wrapper .team-des h4
+	{
+		font-size: 34px;
+		line-height: 1.2;
+		margin-bottom: 18px;
 	}
 #team .team-wrapper .team-des span
 	{
-		color: #28a7e9;
+		color: var(--color-claro);
 		display: block;
 		font-weight: bold;
 		padding-bottom: 12px;
+	}
+#team .team-wrapper .team-des p
+	{
+		font-size: 16px;
+		line-height: 1.6;
+		margin-bottom: 6px;
+	}
+#team .team-wrapper .team-des .team-title
+	{
+		font-weight: 700;
+		margin-top: 22px;
+		margin-bottom: 2px;
+	}
+#team .team-wrapper .team-des .team-title-light
+	{
+		font-weight: 500;
+		margin-bottom: 2px;
 	}
 /* end team */
 
@@ -310,18 +420,18 @@ header .social-icon li a
 	}
 #service .col-md-4:hover
 	{
-		background: #505050;
+		background: var(--color-principal-suave);
 	}
 #service .active
 	{
-		background: #505050;
+		background: var(--color-principal-suave);
 		padding: 40px;
 	}
 #service .fa
 	{
-		border: 1px solid #fff;
+		border: 1px solid var(--color-acento);
 		border-radius: 2px;
-		color: #fff;
+		color: var(--color-acento);
 		font-size: 50px;
 		width: 100px;
 		height: 100px;
@@ -330,7 +440,7 @@ header .social-icon li a
 	}
 #service h4
 	{
-		color: #28a7e9;
+		color: var(--color-acento);
 		font-weight: 600;
 		padding-top: 10px;
 		padding-bottom: 14px;
@@ -358,7 +468,7 @@ header .social-icon li a
 	}
 #portfolio .portfolio-thumb .portfolio-overlay
 	{
-		background: #28a7e9;
+		background: var(--color-acento);
 		top: 0;
 		left: 0;
 		right: 0;
@@ -381,9 +491,9 @@ header .social-icon li a
 #portfolio .portfolio-thumb .portfolio-overlay .btn
 	{
 		background: none;
-		border: 1px solid #fff;
+		border: 1px solid var(--color-claro);
 		border-radius: 2px;
-		color: #fff;
+		color: var(--color-claro);
 		font-weight: bold;
 	}
 #portfolio .portfolio-thumb:hover .portfolio-overlay
@@ -396,15 +506,15 @@ header .social-icon li a
 /* start contact */
 #contact
 	{
-		background: #202020;
+		background: var(--color-principal-profundo);
 	}
 #contact .form-control
 	{
 		background: transparent;
-		border: 1px solid #28a7e9;
+		border: 1px solid var(--color-acento);
 		border-radius: 2px;
 		box-shadow: none;
-		color: #fff;
+		color: var(--color-claro);
 		margin-top: 6px;
 		margin-bottom: 16px;
 	}
@@ -418,7 +528,7 @@ header .social-icon li a
 	}
 #contact input[type="submit"]
 	{
-		background: #28a7e9;
+		background: var(--color-acento);
 		font-weight: bold;
 		-webkit-transition: all 0.4s ease-in-out;
 		        transition: all 0.4s ease-in-out;
@@ -429,7 +539,7 @@ header .social-icon li a
 	}
 #contact address
 	{
-		border-bottom: 1px solid #505050;
+		border-bottom: 1px solid var(--color-principal-suave);
 		padding-top: 30px;
 	}
 #contact address .address-title
@@ -445,7 +555,7 @@ header .social-icon li a
 	}
 #contact address .fa
 	{
-		border: 1px solid #fff;
+		border: 1px solid var(--color-claro);
 		border-radius: 2px;
 		width: 40px;
 		height: 40px;
@@ -486,9 +596,9 @@ header .social-icon li a
 	}
 .social-icon li a
 	{
-		border: 1px solid #fff;
+		border: 1px solid var(--color-borde);
 		border-radius: 2px;
-		color: #fff;
+		color: var(--color-texto-secundario);
 		width: 40px;
 		height: 40px;
 		line-height: 40px;
@@ -500,7 +610,7 @@ header .social-icon li a
 	}
 .social-icon li a:hover
 	{
-		background: #28a7e9;
+		background: var(--color-acento);
 		border-color: transparent;
 	}
 /* end social icon */
@@ -513,13 +623,31 @@ header .social-icon li a
 
 /* start 980 media quires */
 @media only screen and ( max-width: 980px ) {
+	#about .quienes-somos-row {
+		display: block;
+	}
+	#about .quienes-somos-texto-col,
+	#about .quienes-somos-logo-col {
+		display: block;
+	}
+	#about .quienes-somos-logo-wrap {
+		margin-top: 20px;
+	}
 	#team .team-wrapper
 		{
 			margin-top: 40px;
 		}
+	#team .team-wrapper .team-photo
+		{
+			height: 320px;
+		}
+	#team .team-wrapper .team-des h4
+		{
+			font-size: 30px;
+		}
 	#portfolio .portfolio-thumb .portfolio-overlay
 	{
-		background: #28a7e9;
+		background: var(--color-acento);
 		top: 0;
 		left: 0;
 		right: 0;
@@ -572,6 +700,28 @@ header .social-icon li a
 		padding-bottom: 5px;
 		line-height: 35px;
 	}
+	.navbar-default .navbar-brand {
+		font-size: 16px;
+	}
+	.navbar-default .navbar-brand .brand-logo {
+		height: 36px;
+		max-width: 90px;
+	}
+	.navbar-default .navbar-brand .brand-text {
+		font-size: 14px;
+	}
+	#team .team-wrapper
+		{
+			min-height: 0;
+		}
+	#team .team-wrapper .team-photo
+		{
+			height: 280px;
+		}
+	#team .team-wrapper .team-des h4
+		{
+			font-size: 26px;
+		}
 }
 /* end 768 media quires */
 
