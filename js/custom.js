@@ -64,6 +64,7 @@ $(function(){
 
         var payload = {
             _subject: '[Asunto] ' + asuntoIngresado,
+            _captcha: 'false',
             name: nombre,
             email: correo,
             message: cuerpo
@@ -81,12 +82,20 @@ $(function(){
             body: JSON.stringify(payload)
         })
         .then(function(response) {
-            if (!response.ok) {
-                throw new Error('No se pudo enviar el formulario.');
-            }
-            return response.json();
+            return response.json().then(function(data) {
+                return {
+                    ok: response.ok,
+                    data: data
+                };
+            });
         })
-        .then(function() {
+        .then(function(result) {
+            var apiSuccess = String(result.data && result.data.success).toLowerCase() === 'true';
+            if (!result.ok || !apiSuccess) {
+                var apiMessage = (result.data && result.data.message) ? result.data.message : 'No fue posible enviar la consulta.';
+                throw new Error(apiMessage);
+            }
+
             $status.text('');
             $form.fadeOut(260, function() {
                 $success
@@ -94,8 +103,8 @@ $(function(){
                     .fadeIn(420);
             });
         })
-        .catch(function() {
-            $status.text('No fue posible enviar la consulta. Intenta nuevamente en unos minutos.');
+        .catch(function(error) {
+            $status.text('No fue posible enviar la consulta: ' + error.message);
         })
         .finally(function() {
             $submit.prop('disabled', false).val('Enviar consulta');
