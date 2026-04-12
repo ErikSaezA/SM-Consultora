@@ -52,7 +52,7 @@ $(function(){
         var correo = $('#email').val() || 'Sin correo';
         var mensaje = $('#message').val() || 'Sin mensaje';
 
-        var asunto = '[ASUNTO] ' + nombre;
+        var asunto = 'Consulta web - ' + nombre;
         var cuerpo = '[' + correo + '] ' + mensaje;
         var mailtoUrl = 'mailto:contacto@sm-consultora.com?subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(cuerpo);
 

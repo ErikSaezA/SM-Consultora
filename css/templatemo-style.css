@@ -279,10 +279,31 @@ header span
 		padding-right: 10px;
 		padding-left: 4px;
 	}
+header p
+	{
+		margin: 0 0 8px 0;
+	}
+header .row > div:first-child
+	{
+		padding-left: 0;
+	}
 header a
 	{
 		color: #d9e3f3;
 		font-weight: 600;
+	}
+header .header-phone
+	{
+		white-space: nowrap;
+		word-break: normal;
+		overflow-wrap: normal;
+	}
+header .header-email,
+header .header-email a
+	{
+		white-space: nowrap;
+		word-break: normal;
+		overflow-wrap: normal;
 	}
 header .social-icon
 	{
