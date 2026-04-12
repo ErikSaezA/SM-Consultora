@@ -285,11 +285,15 @@
    						  	
 							<label for="email">Correo</label>
 	    						<input name="email" type="email" class="form-control" id="email" required>
+
+                            <label for="subject">Asunto</label>
+	    					<input name="subject" type="text" class="form-control" id="subject" placeholder="Ej: Optimización de aula virtual" required>
    						  	
                             <label for="message">¿Qué quieres mejorar?</label>
 	    						<textarea name="message" rows="4" class="form-control" id="message" placeholder="Moodle, captación web, reportes, evidencia..." required></textarea>
     						
                             <input type="submit" class="form-control" value="Enviar consulta">
+	    					<p id="form-status" class="form-status" aria-live="polite"></p>
     					</form>
     				</div>
     				<div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-offset="50" data-wow-delay="0.6s">

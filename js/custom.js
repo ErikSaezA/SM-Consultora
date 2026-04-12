@@ -48,15 +48,52 @@ $(function(){
     $('#contact-form').on('submit', function(event){
         event.preventDefault();
 
-        var nombre = $('#fullname').val() || 'Sin nombre';
-        var correo = $('#email').val() || 'Sin correo';
-        var mensaje = $('#message').val() || 'Sin mensaje';
+        var $submit = $('#contact-form input[type="submit"]');
+        var $status = $('#form-status');
 
-        var asunto = 'Consulta web - ' + nombre;
-        var cuerpo = '[' + correo + '] ' + mensaje;
-        var mailtoUrl = 'mailto:contacto@sm-consultora.com?subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(cuerpo);
+        var nombre = $('#fullname').val().trim() || 'Sin nombre';
+        var correo = $('#email').val().trim() || 'Sin correo';
+        var asuntoIngresado = $('#subject').val().trim() || 'Sin asunto';
+        var mejora = $('#message').val().trim() || 'Sin detalle';
 
-        window.location.href = mailtoUrl;
+        var cuerpo = '[Nombre] ' + nombre + '\n' +
+            '[Correo] ' + correo + '\n\n' +
+            '[Que quieres mejorar]\n' + mejora;
+
+        var payload = {
+            _subject: '[Asunto] ' + asuntoIngresado,
+            name: nombre,
+            email: correo,
+            message: cuerpo
+        };
+
+        $submit.prop('disabled', true).val('Enviando...');
+        $status.text('Enviando consulta...');
+
+        fetch('https://formsubmit.co/ajax/contacto@sm-consultora.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('No se pudo enviar el formulario.');
+            }
+            return response.json();
+        })
+        .then(function() {
+            $status.text('Consulta enviada correctamente. Te responderemos pronto.');
+            $('#contact-form')[0].reset();
+        })
+        .catch(function() {
+            $status.text('No fue posible enviar la consulta. Intenta nuevamente en unos minutos.');
+        })
+        .finally(function() {
+            $submit.prop('disabled', false).val('Enviar consulta');
+        });
     });
     /* end contact form mailto */
 

@@ -739,6 +739,14 @@ header .social-icon li a
 		border-color: var(--color-acento-fuerte);
 		color: var(--color-texto);
 	}
+#contact .form-status
+	{
+		min-height: 24px;
+		margin-top: 8px;
+		margin-bottom: 0;
+		color: #d8e1f0;
+		font-size: 14px;
+	}
 #contact address
 	{
 		border-bottom: 1px solid var(--color-principal-suave);
