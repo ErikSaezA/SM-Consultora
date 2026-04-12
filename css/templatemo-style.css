@@ -5,14 +5,15 @@ http://www.templatemo.com/preview/templatemo_450_awesome
 
 :root
 	{
-		--color-principal: #f5f6f7;
-		--color-claro: #ffffff;
-		--color-acento: #6b7280;
-		--color-principal-suave: #e5e7eb;
-		--color-principal-profundo: #2f343a;
-		--color-texto: #1f2328;
-		--color-texto-secundario: #4b5563;
-		--color-borde: #c8cdd3;
+		--color-principal: #f4efe7;
+		--color-claro: #fffdf9;
+		--color-acento: #b6783f;
+		--color-acento-fuerte: #8e5f34;
+		--color-principal-suave: #e6ddcf;
+		--color-principal-profundo: #1f2f3f;
+		--color-texto: #243246;
+		--color-texto-secundario: #5f6673;
+		--color-borde: #d8ccba;
 	}
 
 body
@@ -29,7 +30,7 @@ a {
 }
 	
 a:hover {
-	color: var(--color-texto);
+	color: var(--color-acento-fuerte);
 }
 
 /* start h2 */
@@ -144,6 +145,8 @@ header
 		min-height: 20px;
 		padding-top: 18px;
 		padding-bottom: 10px;
+		background: var(--color-principal-profundo);
+		color: var(--color-claro);
 	}
 header .fa
 	{
@@ -151,13 +154,14 @@ header .fa
 	}
 header span
 	{
+		color: var(--color-claro);
 		font-weight: bold;
 		padding-right: 10px;
 		padding-left: 4px;
 	}
 header a
 	{
-		color: var(--color-texto-secundario);
+		color: #e7ecf4;
 		font-weight: 600;
 	}
 header .social-icon
@@ -167,6 +171,7 @@ header .social-icon
 header .social-icon li a
 	{
 		border: none;
+		color: #e7ecf4;
 		width: 20px;
 		height: 20px;
 		line-height: 20px;
@@ -177,8 +182,9 @@ header .social-icon li a
 /* start nagivation */
 .navbar-default
 	{
-		background: var(--color-claro);
+		background: rgba(248, 245, 241, 0.95);
 		border: none;
+		border-bottom: 1px solid var(--color-borde);
 		box-shadow: none;
 		margin: 0 !important;
 	}
@@ -234,27 +240,50 @@ header .social-icon li a
 /* start home */
 #home
 	{
-		background: url('../images/home-bg.jpg') no-repeat;
-		background-size: cover;
-		padding-top: 160px;
-		padding-bottom: 100px;
-		min-height: 650px;
-		color: var(--color-claro);
+		background: linear-gradient(120deg, #f7f1e8 0%, #ece3d6 48%, #f9f3ea 100%);
+		padding-top: 150px;
+		padding-bottom: 110px;
+		min-height: 640px;
+		color: var(--color-texto);
+		position: relative;
+		overflow: hidden;
+	}
+#home:before
+	{
+		content: '';
+		position: absolute;
+		left: 12%;
+		top: -120px;
+		width: 420px;
+		height: 760px;
+		background: rgba(255, 255, 255, 0.45);
+		border-radius: 220px;
+		transform: rotate(12deg);
+		pointer-events: none;
+	}
+#home .container
+	{
+		position: relative;
+		z-index: 1;
 	}
 #home h1
 	{
-		font-weight: 300;
-		font-size: 70px;
-		padding-bottom: 10px;
+		font-family: 'Georgia', 'Times New Roman', serif;
+		font-weight: 700;
+		font-size: 66px;
+		line-height: 1.08;
+		letter-spacing: 0.2px;
+		padding-bottom: 18px;
 	}
 #home h1 span
 	{
-		color: var(--color-acento);
-		font-weight: bold;
+		color: var(--color-texto);
+		font-weight: 700;
 	}
 #home .btn
 	{
-		background: transparent;
+		background: var(--color-acento);
+		border: 1px solid var(--color-acento);
 		border-radius: 2px;
 		color: var(--color-claro);
 		font-size: 16px;
@@ -268,12 +297,14 @@ header .social-icon li a
 	}
 #home .btn:hover
 	{
-		background: var(--color-acento);
+		background: var(--color-acento-fuerte);
+		color: var(--color-claro);
 		border-color: transparent;
 	}
 .element {
 	height: 60px;
 	font-size: 16px;
+	color: var(--color-texto-secundario);
 }
 /* end home */
 
