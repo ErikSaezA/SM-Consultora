@@ -2,17 +2,21 @@
 -------------------------------------------*/
 $(function(){
 
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     /* start typed element */
     //http://stackoverflow.com/questions/24874797/select-div-title-text-and-make-array-with-jquery
-    var subElementArray = $.map($('.sub-element'), function(el) { return $(el).text(); });    
-    $(".element").typed({
-        strings: subElementArray,
-        typeSpeed: 30,
-        contentType: 'html',
-        showCursor: false,
-        loop: true,
-        loopCount: true,
-    });
+    var subElementArray = $.map($('.sub-element'), function(el) { return $(el).text(); });
+    if (!prefersReducedMotion) {
+        $(".element").typed({
+            strings: subElementArray,
+            typeSpeed: 30,
+            contentType: 'html',
+            showCursor: false,
+            loop: true,
+            loopCount: true,
+        });
+    }
     /* end typed element */
 
     /* Smooth scroll and Scroll spy (https://github.com/ChrisWojcik/single-page-nav)    
@@ -60,7 +64,9 @@ $(function(){
 
     /* wow
     -----------------*/
-    new WOW().init();
+    if (!prefersReducedMotion) {
+        new WOW().init();
+    }
 });
 
 /* start preloader */
