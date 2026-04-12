@@ -104,7 +104,15 @@ $(function(){
             });
         })
         .catch(function(error) {
-            $status.text('No fue posible enviar la consulta: ' + error.message);
+            var msg = error.message || 'No fue posible enviar la consulta.';
+
+            if (msg.toLowerCase().indexOf('needs activation') !== -1) {
+                msg = 'El formulario necesita activación inicial. Revisa la casilla contacto@sm-consultora.com y haz clic en el enlace "Activate Form" (solo una vez).';
+            } else if (msg.toLowerCase().indexOf('open this page through a web server') !== -1) {
+                msg = 'El envío no funciona abriendo el archivo HTML directamente. Ejecuta el sitio desde un servidor local (por ejemplo Live Server).';
+            }
+
+            $status.text('No fue posible enviar la consulta: ' + msg);
         })
         .finally(function() {
             $submit.prop('disabled', false).val('Enviar consulta');
