@@ -100,6 +100,30 @@ h1, h2, h3, h4, .navbar-default .navbar-brand .brand-text
 				height: 34px;
 				border-color: rgba(245, 165, 36, 0.75);
 			}
+		body.cursor-enabled.cursor-contact .cursor-dot
+			{
+				background: rgba(255, 255, 255, 0.95);
+			}
+		body.cursor-enabled.cursor-contact .cursor-ring
+			{
+				border-color: rgba(255, 255, 255, 0.75);
+			}
+		body.cursor-enabled.cursor-contact.cursor-active .cursor-ring
+			{
+				border-color: rgba(245, 165, 36, 0.9);
+			}
+		body.cursor-enabled.cursor-header .cursor-dot
+			{
+				background: rgba(255, 255, 255, 0.95);
+			}
+		body.cursor-enabled.cursor-header .cursor-ring
+			{
+				border-color: rgba(255, 255, 255, 0.75);
+			}
+		body.cursor-enabled.cursor-header.cursor-active .cursor-ring
+			{
+				border-color: rgba(245, 165, 36, 0.9);
+			}
 	}
 
 .animated
@@ -499,6 +523,19 @@ header .header-email a
 		word-break: normal;
 		overflow-wrap: normal;
 	}
+header .header-email a
+	{
+		color: #ffffff;
+		-webkit-transition: color 0.08s linear, text-decoration-color 0.08s linear, opacity 0.08s linear;
+		        transition: color 0.08s linear, text-decoration-color 0.08s linear, opacity 0.08s linear;
+	}
+header .header-email a:hover,
+header .header-email a:focus-visible
+	{
+		color: var(--color-acento);
+		text-decoration: underline;
+		text-decoration-color: var(--color-acento);
+	}
 header .social-icon
 	{
 		display: flex;
@@ -521,6 +558,13 @@ header .social-icon li a
 		height: 24px;
 		line-height: 24px;
 		text-align: center;
+		-webkit-transition: color 0.08s linear, background-color 0.08s linear, border-color 0.08s linear;
+		        transition: color 0.08s linear, background-color 0.08s linear, border-color 0.08s linear;
+	}
+header .social-icon li a:hover
+	{
+		background: transparent;
+		color: var(--color-acento);
 	}
 /* end header */
 

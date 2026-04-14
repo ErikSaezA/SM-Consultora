@@ -17,6 +17,8 @@ $(function(){
             var targetX = ringX;
             var targetY = ringY;
             var isVisible = false;
+            var $contactSection = $('#contact');
+            var $headerSection = $('header');
 
             var renderCursor = function() {
                 ringX += (targetX - ringX) * 0.2;
@@ -43,6 +45,26 @@ $(function(){
                     isVisible = false;
                 }
             });
+
+            if ($contactSection.length) {
+                $contactSection.on('mouseenter', function() {
+                    $body.addClass('cursor-contact');
+                });
+
+                $contactSection.on('mouseleave', function() {
+                    $body.removeClass('cursor-contact');
+                });
+            }
+
+            if ($headerSection.length) {
+                $headerSection.on('mouseenter', function() {
+                    $body.addClass('cursor-header');
+                });
+
+                $headerSection.on('mouseleave', function() {
+                    $body.removeClass('cursor-header');
+                });
+            }
 
             $(document).on('mouseenter', 'a, button, input, textarea, select, label, .navbar-toggle, [role="button"]', function() {
                 $body.addClass('cursor-active');
