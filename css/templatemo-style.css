@@ -538,20 +538,20 @@ header .social-icon li a
 		color: var(--color-texto);
 		display: flex;
 		align-items: center;
-		gap: 18px;
+		gap: 14px;
 		font-weight: 500;
 		font-size: 22px;
-		height: 84px;
+		height: 72px;
 		line-height: 1;
-		padding: 10px 0px 0px 12px;
+		padding: 6px 0px 0px 12px;
 	}
 .navbar-default .navbar-brand .brand-logo
 	{
-		height: 78px;
+		height: 62px;
 		width: auto;
-		max-width: 228px;
+		max-width: 186px;
 		display: block;
-		transform: translateY(5px);
+		transform: none;
 	}
 .navbar-default .navbar-brand .brand-text
 	{
@@ -734,7 +734,7 @@ header .social-icon li a
 	{
 		justify-content: center;
 		position: relative;
-		top: 90px;
+		top: 18px;
 	}
 #about .quienes-somos-texto
 	{
