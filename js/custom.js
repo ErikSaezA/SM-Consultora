@@ -3,6 +3,58 @@
 $(function(){
 
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    var cursorEnabled = $('body').hasClass('cursor-enabled');
+
+    if (!prefersReducedMotion && hasFinePointer && cursorEnabled) {
+        var $body = $('body');
+        var $cursorDot = $('.cursor-dot');
+        var $cursorRing = $('.cursor-ring');
+
+        if ($cursorDot.length && $cursorRing.length) {
+            var ringX = window.innerWidth / 2;
+            var ringY = window.innerHeight / 2;
+            var targetX = ringX;
+            var targetY = ringY;
+            var isVisible = false;
+
+            var renderCursor = function() {
+                ringX += (targetX - ringX) * 0.2;
+                ringY += (targetY - ringY) * 0.2;
+                $cursorRing.css('transform', 'translate(' + ringX + 'px, ' + ringY + 'px) translate(-50%, -50%)');
+                requestAnimationFrame(renderCursor);
+            };
+
+            $(window).on('mousemove', function(event) {
+                targetX = event.clientX;
+                targetY = event.clientY;
+
+                $cursorDot.css('transform', 'translate(' + targetX + 'px, ' + targetY + 'px) translate(-50%, -50%)');
+
+                if (!isVisible) {
+                    $cursorDot.add($cursorRing).css('opacity', 1);
+                    isVisible = true;
+                }
+            });
+
+            $(window).on('mouseout', function(event) {
+                if (!event.relatedTarget && !event.toElement) {
+                    $cursorDot.add($cursorRing).css('opacity', 0);
+                    isVisible = false;
+                }
+            });
+
+            $(document).on('mouseenter', 'a, button, input, textarea, select, label, .navbar-toggle, [role="button"]', function() {
+                $body.addClass('cursor-active');
+            });
+
+            $(document).on('mouseleave', 'a, button, input, textarea, select, label, .navbar-toggle, [role="button"]', function() {
+                $body.removeClass('cursor-active');
+            });
+
+            renderCursor();
+        }
+    }
 
     /* start typed element */
     //http://stackoverflow.com/questions/24874797/select-div-title-text-and-make-array-with-jquery
@@ -125,7 +177,20 @@ $(function(){
     /* wow
     -----------------*/
     if (!prefersReducedMotion) {
-        new WOW().init();
+        $('.wow[data-wow-delay]').each(function() {
+            var rawDelay = String($(this).attr('data-wow-delay') || '').trim();
+            var parsedDelay = parseFloat(rawDelay);
+
+            if (!isNaN(parsedDelay) && rawDelay.indexOf('s') !== -1) {
+                var fasterDelay = Math.max(0.03, parsedDelay * 0.18);
+                $(this).attr('data-wow-delay', fasterDelay.toFixed(2) + 's');
+            }
+        });
+
+        new WOW({
+            offset: 12,
+            mobile: true
+        }).init();
     }
 });
 
