@@ -538,18 +538,18 @@ header .social-icon li a
 		color: var(--color-texto);
 		display: flex;
 		align-items: center;
-		gap: 14px;
+		gap: 12px;
 		font-weight: 500;
 		font-size: 22px;
-		height: 72px;
+		height: 66px;
 		line-height: 1;
-		padding: 6px 0px 0px 12px;
+		padding: 4px 0px 0px 10px;
 	}
 .navbar-default .navbar-brand .brand-logo
 	{
-		height: 62px;
+		height: 54px;
 		width: auto;
-		max-width: 186px;
+		max-width: 164px;
 		display: block;
 		transform: none;
 	}
@@ -1250,9 +1250,9 @@ header .social-icon li a
 		font-size: 16px;
 	}
 	.navbar-default .navbar-brand .brand-logo {
-		height: 52px;
-		max-width: 132px;
-		transform: translateY(2px);
+		height: 44px;
+		max-width: 112px;
+		transform: none;
 	}
 	.navbar-default .navbar-brand .brand-text {
 		font-size: 14px;
