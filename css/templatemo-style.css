@@ -568,6 +568,16 @@ header .social-icon li a
 		font-size: 13px;
 		height: 70px;
 		line-height: 40px;
+		transition: text-shadow 0.2s ease, color 0.2s ease;
+	}
+
+.navbar-default .navbar-nav li a:hover,
+.navbar-default .navbar-nav li a:focus
+	{
+		color: var(--color-principal-profundo) !important;
+		text-shadow: 0 0 1px rgba(255, 255, 255, 0.35),
+			0 0 10px rgba(245, 165, 36, 0.75),
+			0 3px 14px rgba(11, 31, 59, 0.45);
 	}
 
 .navbar-default .navbar-nav > li > a.current { 
