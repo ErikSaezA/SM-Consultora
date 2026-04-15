@@ -5,9 +5,9 @@ $(function(){
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var hasFinePointer = window.matchMedia('(pointer: fine)').matches;
     var cursorEnabled = $('body').hasClass('cursor-enabled');
+    var $body = $('body');
 
     if (!prefersReducedMotion && hasFinePointer && cursorEnabled) {
-        var $body = $('body');
         var $cursorDot = $('.cursor-dot');
         var $cursorRing = $('.cursor-ring');
 
@@ -93,6 +93,155 @@ $(function(){
     }
     /* end typed element */
 
+    var clamp = function(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+    };
+
+    var scheduleFrame = window.requestAnimationFrame || function(callback) {
+        return window.setTimeout(callback, 16);
+    };
+
+    var $nav = $('.templatemo-nav');
+    var $hero = $('#home');
+    var heroElement = $hero.get(0);
+    var heroLayers = [];
+    var scrollTicking = false;
+    var sectionElements = $('section[id]').toArray();
+    var revealTargets = [];
+
+    if (heroElement) {
+        heroLayers = [
+            { element: $hero.find('.hero-orb-left').get(0), factorY: -0.18, factorX: -0.05, clamp: 48 },
+            { element: $hero.find('.hero-orb-right').get(0), factorY: 0.14, factorX: 0.06, clamp: 42 },
+            { element: $hero.find('.hero-grid').get(0), factorY: -0.08, factorX: -0.02, clamp: 22 },
+            { element: $hero.find('.hero-beam').get(0), factorY: 0.2, factorX: 0.04, clamp: 58 },
+            { element: $hero.find('.hero-orbit').get(0), factorY: 0.16, factorX: 0.09, clamp: 64 },
+            { element: $hero.find('.hero-pulse').get(0), factorY: -0.12, factorX: -0.03, clamp: 52 }
+        ].filter(function(layer) {
+            return !!layer.element;
+        });
+    }
+
+    if (!prefersReducedMotion) {
+        $body.addClass('motion-enhanced');
+
+        [
+            { selector: '#about .quienes-somos-row', className: 'reveal-stage' },
+            { selector: '#team .row > .col-md-12, #service .row > .col-md-12, #improvement-lines .row > .col-md-12, #contact .row > .col-md-12', className: 'reveal-stage reveal-title' },
+            { selector: '#team .team-wrapper, #service .row > .col-md-4, #improvement-lines .improvement-card, #contact .row > .col-md-6', className: 'reveal-stage' }
+        ].forEach(function(group) {
+            $(group.selector).each(function(index) {
+                $(this).addClass(group.className);
+                this.style.setProperty('--reveal-delay', ((index % 4) * 55) + 'ms');
+                revealTargets.push(this);
+            });
+        });
+    }
+
+    var updateScrollEffects = function() {
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+
+        if (scrollTop > 58) {
+            $nav.addClass('sticky');
+        } else {
+            $nav.removeClass('sticky');
+        }
+
+        $nav.toggleClass('nav-scrolled', scrollTop > 12);
+        document.body.style.setProperty('--page-scroll-progress', (scrollTop / maxScroll).toFixed(4));
+
+        if (!prefersReducedMotion && heroElement && heroLayers.length) {
+            var heroRect = heroElement.getBoundingClientRect();
+
+            if (heroRect.bottom > -20 && heroRect.top < window.innerHeight + 20) {
+                var heroCenterOffset = heroRect.top + (heroRect.height / 2) - (window.innerHeight / 2);
+                var heroTravel = clamp(heroCenterOffset * -0.18, -72, 118);
+
+                heroElement.style.setProperty('--hero-content-shift', (heroTravel * -0.12).toFixed(2) + 'px');
+
+                heroLayers.forEach(function(layer) {
+                    var shiftY = clamp(heroTravel * layer.factorY, -layer.clamp, layer.clamp);
+                    var shiftX = clamp(heroTravel * layer.factorX, -(layer.clamp * 0.7), layer.clamp * 0.7);
+
+                    layer.element.style.setProperty('--scroll-shift-y', shiftY.toFixed(2) + 'px');
+                    layer.element.style.setProperty('--scroll-shift-x', shiftX.toFixed(2) + 'px');
+                });
+            }
+        }
+    };
+
+    var requestScrollEffects = function() {
+        if (scrollTicking) {
+            return;
+        }
+
+        scrollTicking = true;
+        scheduleFrame(function() {
+            updateScrollEffects();
+            scrollTicking = false;
+        });
+    };
+
+    if (!prefersReducedMotion && heroElement && hasFinePointer) {
+        $hero.on('mousemove', function(event) {
+            var rect = heroElement.getBoundingClientRect();
+            var pointerX = ((event.clientX - rect.left) / rect.width) - 0.5;
+            var pointerY = ((event.clientY - rect.top) / rect.height) - 0.5;
+
+            heroElement.style.setProperty('--hero-pointer-x', (pointerX * 28).toFixed(2) + 'px');
+            heroElement.style.setProperty('--hero-pointer-y', (pointerY * 24).toFixed(2) + 'px');
+            heroElement.style.setProperty('--hero-content-pointer-x', (pointerX * -12).toFixed(2) + 'px');
+            heroElement.style.setProperty('--hero-content-pointer-y', (pointerY * -10).toFixed(2) + 'px');
+        });
+
+        $hero.on('mouseleave', function() {
+            heroElement.style.setProperty('--hero-pointer-x', '0px');
+            heroElement.style.setProperty('--hero-pointer-y', '0px');
+            heroElement.style.setProperty('--hero-content-pointer-x', '0px');
+            heroElement.style.setProperty('--hero-content-pointer-y', '0px');
+        });
+    }
+
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+        var activeSectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    $(entry.target).addClass('section-current');
+                } else {
+                    $(entry.target).removeClass('section-current');
+                }
+            });
+        }, {
+            threshold: 0.35,
+            rootMargin: '-12% 0px -42% 0px'
+        });
+
+        sectionElements.forEach(function(section) {
+            activeSectionObserver.observe(section);
+        });
+
+        if (revealTargets.length) {
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        $(entry.target).addClass('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: '0px 0px -10% 0px'
+            });
+
+            revealTargets.forEach(function(target) {
+                revealObserver.observe(target);
+            });
+        }
+    } else if (revealTargets.length) {
+        $(revealTargets).addClass('is-visible');
+    }
+
     /* Smooth scroll and Scroll spy (https://github.com/ChrisWojcik/single-page-nav)    
     ---------------------------------------------------------------------------------*/ 
     $('.templatemo-nav').singlePageNav({
@@ -102,14 +251,8 @@ $(function(){
     });
 
     /* start navigation top js */
-    $(window).scroll(function(){
-        if($(this).scrollTop()>58){
-            $(".templatemo-nav").addClass("sticky");
-        }
-        else{
-            $(".templatemo-nav").removeClass("sticky");
-        }
-    });
+    $(window).on('scroll resize', requestScrollEffects);
+    updateScrollEffects();
     
     /* Hide mobile menu after clicking on a link
     -----------------------------------------------*/
@@ -204,7 +347,7 @@ $(function(){
             var parsedDelay = parseFloat(rawDelay);
 
             if (!isNaN(parsedDelay) && rawDelay.indexOf('s') !== -1) {
-                var fasterDelay = Math.max(0.03, parsedDelay * 0.18);
+                var fasterDelay = Math.max(0.02, parsedDelay * 0.12);
                 $(this).attr('data-wow-delay', fasterDelay.toFixed(2) + 's');
             }
         });
