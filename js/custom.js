@@ -183,26 +183,6 @@ $(function(){
         });
     };
 
-    if (!prefersReducedMotion && heroElement && hasFinePointer) {
-        $hero.on('mousemove', function(event) {
-            var rect = heroElement.getBoundingClientRect();
-            var pointerX = ((event.clientX - rect.left) / rect.width) - 0.5;
-            var pointerY = ((event.clientY - rect.top) / rect.height) - 0.5;
-
-            heroElement.style.setProperty('--hero-pointer-x', (pointerX * 28).toFixed(2) + 'px');
-            heroElement.style.setProperty('--hero-pointer-y', (pointerY * 24).toFixed(2) + 'px');
-            heroElement.style.setProperty('--hero-content-pointer-x', (pointerX * -12).toFixed(2) + 'px');
-            heroElement.style.setProperty('--hero-content-pointer-y', (pointerY * -10).toFixed(2) + 'px');
-        });
-
-        $hero.on('mouseleave', function() {
-            heroElement.style.setProperty('--hero-pointer-x', '0px');
-            heroElement.style.setProperty('--hero-pointer-y', '0px');
-            heroElement.style.setProperty('--hero-content-pointer-x', '0px');
-            heroElement.style.setProperty('--hero-content-pointer-y', '0px');
-        });
-    }
-
     if (!prefersReducedMotion && 'IntersectionObserver' in window) {
         var activeSectionObserver = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
